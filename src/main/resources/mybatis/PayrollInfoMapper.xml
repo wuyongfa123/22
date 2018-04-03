@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuyongfa.yifa.financialsystem.dao.PayrollInfoMapper">
+	<resultMap id="BaseResultMap"
+		type="com.wuyongfa.yifa.financialsystem.model.PayrollInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="employee_id" property="employeeId" jdbcType="INTEGER" />
+		<result column="month_day" property="monthDay" jdbcType="INTEGER" />
+		<result column="work_day" property="workDay" jdbcType="INTEGER" />
+		<result column="leave_day" property="leaveDay" jdbcType="DOUBLE" />
+		<result column="absenteeism" property="absenteeism" jdbcType="DOUBLE" />
+		<result column="deduct_wages" property="deductWages" jdbcType="DOUBLE" />
+		<result column="real_wages" property="realWages" jdbcType="DOUBLE" />
+		<result column="base_pay" property="basePay" jdbcType="DOUBLE" />
+		<result column="pay_date" property="payDate" jdbcType="DATE" />
+		<result column="created_at" property="createdAt" jdbcType="DATE" />
+		<result column="updated_at" property="updatedAt" jdbcType="DATE" />
+		<result column="delete_flag" property="deleteFlag" jdbcType="CHAR" />
+		<result column="employee_name" property="employeeName"
+			jdbcType="VARCHAR" />
+		<result column="month" property="month" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, employee_id, month_day, work_day, leave_day,
+		absenteeism, deduct_wages,
+		real_wages,employee_name,
+		pay_date,
+		created_at, updated_at, delete_flag,base_pay,month
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from payroll_info
+		where id = #{id,jdbcType=INTEGER} and delete_flag =
+		'0'
+	</select>
+	<insert id="insertSelective" parameterType="com.wuyongfa.yifa.financialsystem.model.PayrollInfo">
+
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+			select LAST_INSERT_ID()
+		</selectKey>
+
+		insert into payroll_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="employeeId != null">
+				employee_id,
+			</if>
+			<if test="monthDay != null">
+				month_day,
+			</if>
+			<if test="workDay != null">
+				work_day,
+			</if>
+			<if test="basePay != null">
+				base_pay,
+			</if>
+			<if test="leaveDay != null">
+				leave_day,
+			</if>
+			<if test="absenteeism != null">
+				absenteeism,
+			</if>
+			<if test="deductWages != null">
+				deduct_wages,
+			</if>
+			<if test="employeeName !=null">
+				employee_name,
+			</if>
+			<if test="realWages != null">
+				real_wages,
+			</if>
+			<if test="payDate != null">
+				pay_date,
+			</if>
+			<if test="createdAt != null">
+				created_at,
+			</if>
+			<if test="updatedAt != null">
+				updated_at,
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag,
+			</if>
+			<if test="month != null">
+				month,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="employeeId != null">
+				#{employeeId,jdbcType=INTEGER},
+			</if>
+			<if test="monthDay != null">
+				#{monthDay,jdbcType=INTEGER},
+			</if>
+			<if test="workDay != null">
+				#{workDay,jdbcType=INTEGER},
+			</if>
+			<if test="basePay != null">
+				#{basePay,jdbcType=DOUBLE},
+			</if>
+			<if test="leaveDay != null">
+				#{leaveDay,jdbcType=DOUBLE},
+			</if>
+			<if test="absenteeism != null">
+				#{absenteeism,jdbcType=DOUBLE},
+			</if>
+			<if test="deductWages != null">
+				#{deductWages,jdbcType=DOUBLE},
+			</if>
+			<if test="employeeName !=null">
+				#{employeeName,jdbcType=VARCHAR},
+			</if>
+			<if test="realWages != null">
+				#{realWages,jdbcType=DOUBLE},
+			</if>
+			<if test="payDate != null">
+				#{payDate,jdbcType=DATE},
+			</if>
+			<if test="createdAt != null">
+				#{createdAt,jdbcType=DATE},
+			</if>
+			<if test="updatedAt != null">
+				#{updatedAt,jdbcType=DATE},
+			</if>
+			<if test="deleteFlag != null">
+				#{deleteFlag,jdbcType=CHAR},
+			</if>
+			<if test="month !=null">
+				#{month,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.wuyongfa.yifa.financialsystem.model.PayrollInfo">
+		update payroll_info
+		<set>
+			<if test="employeeId != null">
+				employee_id = #{employeeId,jdbcType=INTEGER},
+			</if>
+			<if test="employeeName !=null">
+				employee_name = #{employeeName,jdbcType=VARCHAR},
+			</if>
+			<if test="monthDay != null">
+				month_day = #{monthDay,jdbcType=INTEGER},
+			</if>
+			<if test="workDay != null">
+				work_day = #{workDay,jdbcType=INTEGER},
+			</if>
+			<if test="basePay != null">
+				base_pay = #{basePay,jdbcType=DOUBLE},
+			</if>
+			<if test="leaveDay != null">
+				leave_day = #{leaveDay,jdbcType=DOUBLE},
+			</if>
+			<if test="absenteeism != null">
+				absenteeism = #{absenteeism,jdbcType=DOUBLE},
+			</if>
+			<if test="deductWages != null">
+				deduct_wages = #{deductWages,jdbcType=DOUBLE},
+			</if>
+			<if test="realWages != null">
+				real_wages = #{realWages,jdbcType=DOUBLE},
+			</if>
+			<if test="payDate != null">
+				pay_date = #{payDate,jdbcType=DATE},
+			</if>
+			<if test="createdAt != null">
+				created_at = #{createdAt,jdbcType=DATE},
+			</if>
+			<if test="updatedAt != null">
+				updated_at = #{updatedAt,jdbcType=DATE},
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag = #{deleteFlag,jdbcType=CHAR},
+			</if>
+			<if test="month !=null">
+				month = #{month,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectAllByPage" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from payroll_info where delete_flag='0'
+		<if test="employeeName != null">
+			and employee_name like '%${employeeName}%'
+		</if>
+		order by pay_date desc
+	</select>
+
+	<insert id="addPayrolls">
+		insert insert into payroll_info
+		(employee_id, month_day, work_day,
+		leave_day, absenteeism, deduct_wages,
+		real_wages,employee_name,pay_date, created_at, updated_at,
+		delete_flag)
+		values
+		<foreach collection="payrollInfos" item="payroll" separator=",">
+			(#{payroll.employeeId},#{payroll.monthDay}, #{payroll.workDay},
+			#{payroll.leaveDay},#{payroll.absenteeism}, #{payroll.deductWages},
+			#{payroll.realWages},#{payroll.employeeName},#{payroll.payDate},
+			sysdate(), sysdate(), "0")
+		</foreach>
+	</insert>
+
+	<update id="batchDelete">
+		update payroll_info set delete_flag='1',updated_at=sysdate()
+		<where>
+			id in
+			<foreach collection="ids" item="id" open="(" close=")"
+				separator=",">
+				${id}
+			</foreach>
+		</where>
+	</update>
+
+	<select id="selectByFilter" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from payroll_info
+		<where>
+			<foreach collection="filters.keys" item="key">
+				and ${key} in
+				<foreach collection="filters[key]" item="filter" open="("
+					separator="," close=")">
+					#{filter}
+				</foreach>
+			</foreach>
+		</where>
+	</select>
+
+	<select id="selectEmployeeIdByMonth" resultType="java.lang.Integer">
+		select
+		employee_id from payroll_info where delete_flag = '0' and month =
+		#{month}
+	</select>
+</mapper>

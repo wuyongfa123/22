@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuyongfa.yifa.financialsystem.dao.UserInfoMapper">
+	<resultMap id="BaseResultMap"
+		type="com.wuyongfa.yifa.financialsystem.model.UserInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="created_at" property="createdAt" jdbcType="DATE" />
+		<result column="update_at" property="updateAt" jdbcType="DATE" />
+		<result column="delete_flag" property="deleteFlag" jdbcType="CHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, username, password, created_at, update_at, delete_flag
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from user_info
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insertSelective" parameterType="com.wuyongfa.yifa.financialsystem.model.UserInfo">
+		insert into user_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="username != null">
+				username,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="createdAt != null">
+				created_at,
+			</if>
+			<if test="updateAt != null">
+				update_at,
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="createdAt != null">
+				#{createdAt,jdbcType=DATE},
+			</if>
+			<if test="updateAt != null">
+				#{updateAt,jdbcType=DATE},
+			</if>
+			<if test="deleteFlag != null">
+				#{deleteFlag,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.wuyongfa.yifa.financialsystem.model.UserInfo">
+		update user_info
+		<set>
+			<if test="username != null">
+				username = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="createdAt != null">
+				created_at = #{createdAt,jdbcType=DATE},
+			</if>
+			<if test="updateAt != null">
+				update_at = #{updateAt,jdbcType=DATE},
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag = #{deleteFlag,jdbcType=CHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectUser" resultMap="BaseResultMap">
+		select * from user_info
+		where delete_flag = '0' 
+		and password = #{userInfo.password} 
+		and username = #{userInfo.username}
+	</select>
+
+</mapper>

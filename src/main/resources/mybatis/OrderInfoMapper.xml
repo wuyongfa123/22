@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuyongfa.yifa.financialsystem.dao.OrderInfoMapper">
+	<resultMap id="BaseResultMap"
+		type="com.wuyongfa.yifa.financialsystem.model.OrderInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="company_name" property="companyName" jdbcType="VARCHAR" />
+		<result column="order_code" property="orderCode" jdbcType="VARCHAR" />
+		<result column="order_time" property="orderTime" jdbcType="DATE" />
+		<result column="totals" property="totals" jdbcType="INTEGER" />
+		<result column="money" property="money" jdbcType="DOUBLE" />
+		<result column="end_time" property="endTime" jdbcType="DATE" />
+		<result column="predict_day" property="predictDay" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="CHAR" />
+		<result column="created_at" property="createdAt" jdbcType="DATE" />
+		<result column="updated_at" property="updatedAt" jdbcType="DATE" />
+		<result column="delete_flag" property="deleteFlag" jdbcType="CHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, company_name, order_code, order_time, totals, money, end_time,
+		status, created_at,
+		updated_at, delete_flag,predict_day
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from order_info
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from order_info
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insertSelective" parameterType="com.wuyongfa.yifa.financialsystem.model.OrderInfo">
+		insert into order_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="companyName != null">
+				company_name,
+			</if>
+			<if test="orderCode != null">
+				order_code,
+			</if>
+			<if test="orderTime != null">
+				order_time,
+			</if>
+			<if test="totals != null">
+				totals,
+			</if>
+			<if test="money != null">
+				money,
+			</if>
+			<if test="endTime != null">
+				end_time,
+			</if>
+			<if test="predictDay != null">
+				predict_day,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="createdAt != null">
+				created_at,
+			</if>
+			<if test="updatedAt != null">
+				updated_at,
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="companyName != null">
+				#{companyName,jdbcType=VARCHAR},
+			</if>
+			<if test="orderCode != null">
+				#{orderCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orderTime != null">
+				#{orderTime,jdbcType=DATE},
+			</if>
+			<if test="totals != null">
+				#{totals,jdbcType=INTEGER},
+			</if>
+			<if test="money != null">
+				#{money,jdbcType=DOUBLE},
+			</if>
+			<if test="endTime != null">
+				#{endTime,jdbcType=DATE},
+			</if>
+			<if test="predictDay != null">
+				#{predictDay,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=CHAR},
+			</if>
+			<if test="createdAt != null">
+				#{createdAt,jdbcType=DATE},
+			</if>
+			<if test="updatedAt != null">
+				#{updatedAt,jdbcType=DATE},
+			</if>
+			<if test="deleteFlag != null">
+				#{deleteFlag,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.wuyongfa.yifa.financialsystem.model.OrderInfo">
+		update order_info
+		<set>
+			<if test="companyName != null">
+				company_name = #{companyName,jdbcType=VARCHAR},
+			</if>
+			<if test="orderCode != null">
+				order_code = #{orderCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orderTime != null">
+				order_time = #{orderTime,jdbcType=DATE},
+			</if>
+			<if test="totals != null">
+				totals = #{totals,jdbcType=INTEGER},
+			</if>
+			<if test="money != null">
+				money = #{money,jdbcType=DOUBLE},
+			</if>
+			<if test="endTime != null">
+				end_time = #{endTime,jdbcType=DATE},
+			</if>
+			<if test="predictDay != null">
+				predict_day = #{predictDay,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=CHAR},
+			</if>
+			<if test="createdAt != null">
+				created_at = #{createdAt,jdbcType=DATE},
+			</if>
+			<if test="updatedAt != null">
+				updated_at = #{updatedAt,jdbcType=DATE},
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag = #{deleteFlag,jdbcType=CHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectAllByPage" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from order_info
+		where delete_flag='0'
+		<if test="orderCode != null">
+			and order_code like '%${orderCode}%'
+		</if>
+		<if test="startTime != null">
+			and order_time &gt; #{startTime}
+		</if>
+		<if test="endTime != null">
+			and order_time &lt; #{endTime}
+		</if>
+
+	</select>
+
+	<update id="deleteOrderInfo">
+		update order_info set delete_flag='1',updated_at=sysdate()
+		<where>
+			id in
+			<foreach collection="ids" item="id" open="(" separator=","
+				close=")">
+				#{id}
+			</foreach>
+		</where>
+	</update>
+</mapper>

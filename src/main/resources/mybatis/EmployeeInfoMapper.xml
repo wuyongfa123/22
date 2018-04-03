@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuyongfa.yifa.financialsystem.dao.EmployeeInfoMapper">
+	<resultMap id="BaseResultMap"
+		type="com.wuyongfa.yifa.financialsystem.model.EmployeeInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="age" property="age" jdbcType="INTEGER" />
+		<result column="gender" property="gender" jdbcType="INTEGER" />
+		<result column="birthday" property="birthday" jdbcType="DATE" />
+		<result column="salary" property="salary" jdbcType="DOUBLE" />
+		<result column="job_code" property="jobCode" jdbcType="CHAR" />
+		<result column="job_name" property="jobName" jdbcType="VARCHAR" />
+		<result column="telphone" property="telphone" jdbcType="INTEGER" />
+		<result column="entry_date" property="entryDate" jdbcType="DATE" />
+		<result column="work_type" property="workType" jdbcType="INTEGER" />
+		<result column="created_at" property="createdAt" jdbcType="DATE" />
+		<result column="updated_at" property="updatedAt" jdbcType="DATE" />
+		<result column="delete_flag" property="deleteFlag" jdbcType="CHAR" />
+		<result column="id_code" property="idCode" jdbcType="INTEGER" />
+		<result column="home_path" property="homePath" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, name, age, gender, birthday, salary, job_code,
+		job_name, telphone,
+		entry_date,id_code,home_path,
+		work_type, created_at,
+		updated_at, delete_flag
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from employee_info
+		where id = #{id,jdbcType=INTEGER} and delete_flag =
+		'0'
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		employee_info
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert"
+		parameterType="com.wuyongfa.yifa.financialsystem.model.EmployeeInfo">
+		insert into employee_info (id, name, age,
+		gender,
+		birthday, salary,
+		job_code, job_name, telphone,
+		entry_date, work_type,
+		created_at,
+		updated_at, delete_flag,id_code,home_path)
+		values
+		(#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{age,jdbcType=INTEGER},
+		#{gender,jdbcType=INTEGER},
+		#{birthday,jdbcType=DATE}, #{salary,jdbcType=DOUBLE},
+		#{jobCode,jdbcType=CHAR}, #{jobName,jdbcType=VARCHAR},
+		#{telphone,jdbcType=INTEGER},
+		#{entryDate,jdbcType=DATE},
+		#{workType,jdbcType=INTEGER}, #{createdAt,jdbcType=DATE},
+		#{updatedAt,jdbcType=DATE}, #{deleteFlag,jdbcType=CHAR},
+		#{idCode,jdbcType=INTEGER},
+		#{homePath,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.wuyongfa.yifa.financialsystem.model.EmployeeInfo">
+		insert into employee_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="age != null">
+				age,
+			</if>
+			<if test="gender != null">
+				gender,
+			</if>
+			<if test="birthday != null">
+				birthday,
+			</if>
+			<if test="salary != null">
+				salary,
+			</if>
+			<if test="jobCode != null">
+				job_code,
+			</if>
+			<if test="jobName != null">
+				job_name,
+			</if>
+			<if test="telphone != null">
+				telphone,
+			</if>
+			<if test="entryDate != null">
+				entry_date,
+			</if>
+			<if test="workType != null">
+				work_type,
+			</if>
+			<if test="createdAt != null">
+				created_at,
+			</if>
+			<if test="updatedAt != null">
+				updated_at,
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag,
+			</if>
+			<if test="idCode != null">
+				id_code,
+			</if>
+			<if test="homePath != null">
+				home_path,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="age != null">
+				#{age,jdbcType=INTEGER},
+			</if>
+			<if test="gender != null">
+				#{gender,jdbcType=INTEGER},
+			</if>
+			<if test="birthday != null">
+				#{birthday,jdbcType=DATE},
+			</if>
+			<if test="salary != null">
+				#{salary,jdbcType=DOUBLE},
+			</if>
+			<if test="jobCode != null">
+				#{jobCode,jdbcType=CHAR},
+			</if>
+			<if test="jobName != null">
+				#{jobName,jdbcType=VARCHAR},
+			</if>
+			<if test="telphone != null">
+				#{telphone,jdbcType=INTEGER},
+			</if>
+			<if test="entryDate != null">
+				#{entryDate,jdbcType=DATE},
+			</if>
+			<if test="workType != null">
+				#{workType,jdbcType=INTEGER},
+			</if>
+			<if test="createdAt != null">
+				#{createdAt,jdbcType=DATE},
+			</if>
+			<if test="updatedAt != null">
+				#{updatedAt,jdbcType=DATE},
+			</if>
+			<if test="deleteFlag != null">
+				#{deleteFlag,jdbcType=CHAR},
+			</if>
+			<if test="idCode != null">
+				#{idCode,jdbcType=INTEGER},
+			</if>
+			<if test="homePath != null">
+				#{homePath,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.wuyongfa.yifa.financialsystem.model.EmployeeInfo">
+		update employee_info
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="age != null">
+				age = #{age,jdbcType=INTEGER},
+			</if>
+			<if test="gender != null">
+				gender = #{gender,jdbcType=INTEGER},
+			</if>
+			<if test="birthday != null">
+				birthday = #{birthday,jdbcType=DATE},
+			</if>
+			<if test="salary != null">
+				salary = #{salary,jdbcType=DOUBLE},
+			</if>
+			<if test="jobCode != null">
+				job_code = #{jobCode,jdbcType=CHAR},
+			</if>
+			<if test="jobName != null">
+				job_name = #{jobName,jdbcType=VARCHAR},
+			</if>
+			<if test="telphone != null">
+				telphone = #{telphone,jdbcType=INTEGER},
+			</if>
+			<if test="entryDate != null">
+				entry_date = #{entryDate,jdbcType=DATE},
+			</if>
+			<if test="workType != null">
+				work_type = #{workType,jdbcType=INTEGER},
+			</if>
+			<if test="createdAt != null">
+				created_at = #{createdAt,jdbcType=DATE},
+			</if>
+			<if test="updatedAt != null">
+				updated_at = #{updatedAt,jdbcType=DATE},
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag = #{deleteFlag,jdbcType=CHAR},
+			</if>
+			<if test="idCode != null">
+				id_code = #{idCode,jdbcType=INTEGER},
+			</if>
+			<if test="homePath != null">
+				home_path = #{homePath,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.wuyongfa.yifa.financialsystem.model.EmployeeInfo">
+		update employee_info
+		set name = #{name,jdbcType=VARCHAR},
+		age = #{age,jdbcType=INTEGER},
+		gender = #{gender,jdbcType=INTEGER},
+		birthday = #{birthday,jdbcType=DATE},
+		salary =
+		#{salary,jdbcType=DOUBLE},
+		job_code = #{jobCode,jdbcType=CHAR},
+		job_name = #{jobName,jdbcType=VARCHAR},
+		telphone =
+		#{telphone,jdbcType=INTEGER},
+		entry_date = #{entryDate,jdbcType=DATE},
+		work_type = #{workType,jdbcType=INTEGER},
+		created_at =
+		#{createdAt,jdbcType=DATE},
+		updated_at = #{updatedAt,jdbcType=DATE},
+		delete_flag = #{deleteFlag,jdbcType=CHAR},
+		id_code =
+		#{idCode,jdbcType=INTEGER},
+		home_path = #{homePath,jdbcType=VARCHAR},
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectAllByPage" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from employee_info where delete_flag='0'
+		<if test="employeeInfo.id!=null">
+			and id = #{employeeInfo.id}
+		</if>
+		<if test="employeeInfo.name!=null">
+			and name like '%${employeeInfo.name}%'
+		</if>
+		order by entry_date desc
+	</select>
+	<update id="deleteEmployee">
+		update employee_info set delete_flag='1',updated_at=sysdate()
+		<where>
+			id in
+			<foreach collection="ids" item="id" open="(" separator=","
+				close=")">
+				#{id}
+			</foreach>
+		</where>
+	</update>
+
+	<select id="selectIdByName" resultType="java.lang.Integer">
+		select id from
+		employee_info where name like '%${name}%'
+	</select>
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from employee_info where delete_flag='0'
+	</select>
+
+	<select id="selectOther" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from employee_info where delete_flag = '0'
+
+		<if test="null != ids and ids.size > 0">
+			and id not in
+			<foreach collection="ids" item="id" open="(" separator=","
+				close=")">
+				#{id}
+			</foreach>
+		</if>
+
+	</select>
+</mapper>

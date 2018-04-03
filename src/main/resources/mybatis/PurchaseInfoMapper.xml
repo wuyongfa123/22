@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuyongfa.yifa.financialsystem.dao.PurchaseInfoMapper">
+	<resultMap id="BaseResultMap"
+		type="com.wuyongfa.yifa.financialsystem.model.PurchaseInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="purchase_type_code" property="purchaseTypeCode"
+			jdbcType="CHAR" />
+		<result column="purchase_type_name" property="purchaseTypeName"
+			jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="company" property="company" jdbcType="VARCHAR" />
+		<result column="number" property="number" jdbcType="INTEGER" />
+		<result column="price" property="price" jdbcType="DOUBLE" />
+		<result column="total_price" property="totalPrice" jdbcType="DOUBLE" />
+		<result column="created_at" property="createdAt" jdbcType="DATE" />
+		<result column="updated_at" property="updatedAt" jdbcType="DATE" />
+		<result column="delete_flag" property="deleteFlag" jdbcType="CHAR" />
+		<result column="operate_time" property="operateTime" jdbcType="DATE" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, purchase_type_code, purchase_type_name, remark, company, number,
+		price, total_price,
+		created_at, updated_at, delete_flag, operate_time
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from purchase_info
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert"
+		parameterType="com.wuyongfa.yifa.financialsystem.model.PurchaseInfo">
+		insert into purchase_info (id, purchase_type_code, purchase_type_name,
+		remark, company, number,
+		price, total_price, created_at,
+		updated_at, delete_flag, operate_time
+		)
+		values (#{id,jdbcType=INTEGER}, #{purchaseTypeCode,jdbcType=CHAR},
+		#{purchaseTypeName,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER},
+		#{price,jdbcType=DOUBLE}, #{totalPrice,jdbcType=DOUBLE},
+		#{createdAt,jdbcType=DATE},
+		#{updatedAt,jdbcType=DATE}, #{deleteFlag,jdbcType=CHAR}, #{operateTime,jdbcType=DATE}
+		)
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.wuyongfa.yifa.financialsystem.model.PurchaseInfo">
+		insert into purchase_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="purchaseTypeCode != null">
+				purchase_type_code,
+			</if>
+			<if test="purchaseTypeName != null">
+				purchase_type_name,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="company != null">
+				company,
+			</if>
+			<if test="number != null">
+				number,
+			</if>
+			<if test="price != null">
+				price,
+			</if>
+			<if test="totalPrice != null">
+				total_price,
+			</if>
+			<if test="createdAt != null">
+				created_at,
+			</if>
+			<if test="updatedAt != null">
+				updated_at,
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag,
+			</if>
+			<if test="operateTime != null">
+				operate_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="purchaseTypeCode != null">
+				#{purchaseTypeCode,jdbcType=CHAR},
+			</if>
+			<if test="purchaseTypeName != null">
+				#{purchaseTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="company != null">
+				#{company,jdbcType=VARCHAR},
+			</if>
+			<if test="number != null">
+				#{number,jdbcType=INTEGER},
+			</if>
+			<if test="price != null">
+				#{price,jdbcType=DOUBLE},
+			</if>
+			<if test="totalPrice != null">
+				#{totalPrice,jdbcType=DOUBLE},
+			</if>
+			<if test="createdAt != null">
+				#{createdAt,jdbcType=DATE},
+			</if>
+			<if test="updatedAt != null">
+				#{updatedAt,jdbcType=DATE},
+			</if>
+			<if test="deleteFlag != null">
+				#{deleteFlag,jdbcType=CHAR},
+			</if>
+			<if test="operateTime != null">
+				#{operateTime,jdbcType=DATE},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.wuyongfa.yifa.financialsystem.model.PurchaseInfo">
+		update purchase_info
+		<set>
+			<if test="purchaseTypeCode != null">
+				purchase_type_code = #{purchaseTypeCode,jdbcType=CHAR},
+			</if>
+			<if test="purchaseTypeName != null">
+				purchase_type_name = #{purchaseTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="company != null">
+				company = #{company,jdbcType=VARCHAR},
+			</if>
+			<if test="number != null">
+				number = #{number,jdbcType=INTEGER},
+			</if>
+			<if test="price != null">
+				price = #{price,jdbcType=DOUBLE},
+			</if>
+			<if test="totalPrice != null">
+				total_price = #{totalPrice,jdbcType=DOUBLE},
+			</if>
+			<if test="createdAt != null">
+				created_at = #{createdAt,jdbcType=DATE},
+			</if>
+			<if test="updatedAt != null">
+				updated_at = #{updatedAt,jdbcType=DATE},
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag = #{deleteFlag,jdbcType=CHAR},
+			</if>
+			<if test="operateTime != null">
+				operate_time = #{operateTime,jdbcType=DATE},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.wuyongfa.yifa.financialsystem.model.PurchaseInfo">
+		update purchase_info
+		set purchase_type_code = #{purchaseTypeCode,jdbcType=CHAR},
+		purchase_type_name = #{purchaseTypeName,jdbcType=VARCHAR},
+		remark = #{remark,jdbcType=VARCHAR},
+		company = #{company,jdbcType=VARCHAR},
+		number = #{number,jdbcType=INTEGER},
+		price = #{price,jdbcType=DOUBLE},
+		total_price = #{totalPrice,jdbcType=DOUBLE},
+		created_at = #{createdAt,jdbcType=DATE},
+		updated_at = #{updatedAt,jdbcType=DATE},
+		delete_flag = #{deleteFlag,jdbcType=CHAR},
+		operate_time = #{operateTime,jdbcType=DATE}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectAllByPage" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from purchase_info
+		where delete_flag = '0'
+		<if test="startTime != null">
+			and operate_time &gt; #{startTime}
+		</if>
+		<if test="endTime != null">
+			and operate_time &lt; #{endTime}
+		</if>
+		order by operate_time desc
+	</select>
+
+	<update id="deletePurchaseInfos">
+		update purchase_info set delete_flag='1',updated_at=sysdate()
+		<where>
+			and id in
+			<foreach collection="ids" item="id" open="(" separator=","
+				close=")">
+				#{id}
+			</foreach>
+
+		</where>
+	</update>
+</mapper>

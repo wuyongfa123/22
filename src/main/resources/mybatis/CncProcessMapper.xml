@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuyongfa.yifa.financialsystem.dao.CncProcessMapper">
+	<resultMap id="BaseResultMap"
+		type="com.wuyongfa.yifa.financialsystem.model.CncProcess">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="order_code" property="orderCode" jdbcType="VARCHAR" />
+		<result column="process_code" property="processCode" jdbcType="VARCHAR" />
+		<result column="unit_price" property="unitPrice" jdbcType="DOUBLE" />
+		<result column="status" property="status" jdbcType="CHAR" />
+		<result column="completion_time" property="completionTime"
+			jdbcType="DATE" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, order_code,process_code, unit_price, status, completion_time
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from cnc_process
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insertSelective" parameterType="com.wuyongfa.yifa.financialsystem.model.CncProcess">
+		insert into cnc_process
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="orderCode != null">
+				order_code,
+			</if>
+			<if test="processCode != null">
+				process_code,
+			</if>
+			<if test="unitPrice != null">
+				unit_price,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="completionTime != null">
+				completion_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="orderCode != null">
+				#{orderCode,jdbcType=VARCHAR},
+			</if>
+			<if test="processCode != null">
+				#{processCode,jdbcType=VARCHAR},
+			</if>
+			<if test="unitPrice != null">
+				#{unitPrice,jdbcType=DOUBLE},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=CHAR},
+			</if>
+			<if test="completionTime != null">
+				#{completionTime,jdbcType=DATE},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.wuyongfa.yifa.financialsystem.model.CncProcess">
+		update cnc_process
+		<set>
+			<if test="orderCode != null">
+				order_code = #{orderCode,jdbcType=VARCHAR},
+			</if>
+			<if test="processCode != null">
+				process_code = #{processCode,jdbcType=VARCHAR},
+			</if>
+			<if test="unitPrice != null">
+				unit_price = #{unitPrice,jdbcType=DOUBLE},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=CHAR},
+			</if>
+			<if test="completionTime != null">
+				completion_time = #{completionTime,jdbcType=DATE},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<insert id="batchInsert">
+		insert into cnc_process
+		(order_code,process_code,unit_price,status,completion_time) values
+		<foreach collection="cncProcesses" item="cncProcess"
+			separator=",">
+			(#{cncProcess.orderCode},#{cncProcess.processCode},#{cncProcess.unitPrice},'01',#{cncProcess.completionTime})
+		</foreach>
+	</insert>
+
+	<select id="selectByPage" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from cnc_process 
+		where order_code = #{orderCode} order by completion_time
+	</select>
+	
+	<delete id="batchDelete">
+		delete from cnc_process where id in 
+		<foreach collection="ids" item="id" separator="," open="(" close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

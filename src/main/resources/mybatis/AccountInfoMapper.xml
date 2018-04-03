@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuyongfa.yifa.financialsystem.dao.AccountInfoMapper">
+	<resultMap id="BaseResultMap"
+		type="com.wuyongfa.yifa.financialsystem.model.AccountInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="target" property="target" jdbcType="VARCHAR" />
+		<result column="account_type_code" property="accountTypeCode"
+			jdbcType="CHAR" />
+		<result column="account_type_name" property="accountTypeName"
+			jdbcType="VARCHAR" />
+		<result column="money" property="money" jdbcType="DOUBLE" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="operate_time" property="operateTime" jdbcType="DATE" />
+		<result column="employee_id" property="employeeId" jdbcType="INTEGER" />
+		<result column="payroll_id" property="payrollId" jdbcType="INTEGER" />
+		<result column="employee_name" property="employeeName"
+			jdbcType="VARCHAR" />
+		<result column="updated_at" property="updatedAt" jdbcType="DATE" />
+		<result column="delete_flag" property="deleteFlag" jdbcType="CHAR" />
+		<result column="created_at" property="createdAt" jdbcType="DATE" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, target, account_type_code, account_type_name, money, remark,
+		operate_time, employee_id,
+		employee_name, updated_at, delete_flag, created_at,payroll_id
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from account_info
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from account_info
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insertSelective" parameterType="com.wuyongfa.yifa.financialsystem.model.AccountInfo">
+		insert into account_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="target != null">
+				target,
+			</if>
+			<if test="accountTypeCode != null">
+				account_type_code,
+			</if>
+			<if test="accountTypeName != null">
+				account_type_name,
+			</if>
+			<if test="money != null">
+				money,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="operateTime != null">
+				operate_time,
+			</if>
+			<if test="employeeId != null">
+				employee_id,
+			</if>
+			<if test="employeeName != null">
+				employee_name,
+			</if>
+			<if test="updatedAt != null">
+				updated_at,
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag,
+			</if>
+			<if test="createdAt != null">
+				created_at,
+			</if>
+			<if test="payrollId != null">
+				payroll_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="target != null">
+				#{target,jdbcType=VARCHAR},
+			</if>
+			<if test="accountTypeCode != null">
+				#{accountTypeCode,jdbcType=CHAR},
+			</if>
+			<if test="accountTypeName != null">
+				#{accountTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="money != null">
+				#{money,jdbcType=DOUBLE},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="operateTime != null">
+				#{operateTime,jdbcType=DATE},
+			</if>
+			<if test="employeeId != null">
+				#{employeeId,jdbcType=INTEGER},
+			</if>
+			<if test="employeeName != null">
+				#{employeeName,jdbcType=VARCHAR},
+			</if>
+			<if test="updatedAt != null">
+				#{updatedAt,jdbcType=DATE},
+			</if>
+			<if test="deleteFlag != null">
+				#{deleteFlag,jdbcType=CHAR},
+			</if>
+			<if test="createdAt != null">
+				#{createdAt,jdbcType=DATE},
+			</if>
+			<if test="payrollId != null">
+				#{payrollId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.wuyongfa.yifa.financialsystem.model.AccountInfo">
+		update account_info
+		<set>
+			<if test="target != null">
+				target = #{target,jdbcType=VARCHAR},
+			</if>
+			<if test="accountTypeCode != null">
+				account_type_code = #{accountTypeCode,jdbcType=CHAR},
+			</if>
+			<if test="accountTypeName != null">
+				account_type_name = #{accountTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="money != null">
+				money = #{money,jdbcType=DOUBLE},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="operateTime != null">
+				operate_time = #{operateTime,jdbcType=DATE},
+			</if>
+			<if test="employeeId != null">
+				employee_id = #{employeeId,jdbcType=INTEGER},
+			</if>
+			<if test="employeeName != null">
+				employee_name = #{employeeName,jdbcType=VARCHAR},
+			</if>
+			<if test="updatedAt != null">
+				updated_at = #{updatedAt,jdbcType=DATE},
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag = #{deleteFlag,jdbcType=CHAR},
+			</if>
+			<if test="createdAt != null">
+				created_at = #{createdAt,jdbcType=DATE},
+			</if>
+			<if test="payrollId != null">
+				payroll_id = #{payrollId,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectAllByPage" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from account_info where delete_flag = '0'
+		<if test="null != condition and condition !=''">
+			and account_type_name like '%${condition}%' or target like '%${condition}%' or employee_name like '%${condition}%'
+		</if>
+		
+		order by operate_time desc
+		
+	</select>
+
+	<update id="deleteAccountInfo">
+		update account_info set delete_flag='1',updated_at=sysdate()
+		<where>
+			<foreach collection="filters.keys" item="key">
+				and ${key} in
+				<foreach collection="filters[key]" item="filter" open="("
+					separator="," close=")">
+					#{filter}
+				</foreach>
+			</foreach>
+		</where>
+	</update>
+
+</mapper>

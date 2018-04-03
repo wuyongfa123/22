@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuyongfa.yifa.financialsystem.dao.CheckInfoMapper">
+	<resultMap id="BaseResultMap"
+		type="com.wuyongfa.yifa.financialsystem.model.CheckInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="employee_id" property="employeeId" jdbcType="INTEGER" />
+		<result column="days" property="days" jdbcType="DOUBLE" />
+		<result column="check_type" property="checkType" jdbcType="CHAR" />
+		<result column="check_type_name" property="checkTypeName"
+			jdbcType="VARCHAR" />
+		<result column="start_time" property="startTime" jdbcType="DATE" />
+		<result column="stop_time" property="stopTime" jdbcType="DATE" />
+		<result column="reason" property="reason" jdbcType="VARCHAR" />
+		<result column="created_at" property="createdAt" jdbcType="DATE" />
+		<result column="updated_at" property="updatedAt" jdbcType="DATE" />
+		<result column="delete_flag" property="deleteFlag" jdbcType="CHAR" />
+		<result column="employee_name" property="employeeName"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, employee_id,employee_name, days, check_type, check_type_name,
+		start_time, stop_time, reason,
+		created_at, updated_at, delete_flag
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from check_info
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.wuyongfa.yifa.financialsystem.model.CheckInfo">
+		insert into check_info (id, employee_id,employee_name, days,
+		check_type, check_type_name, start_time,
+		stop_time, reason, created_at,
+		updated_at, delete_flag)
+		values (#{id,jdbcType=INTEGER},
+		#{employeeId,jdbcType=INTEGER},#{employeeName,jdbcType=VARCHAR},
+		#{days,jdbcType=DOUBLE},
+		#{checkType,jdbcType=CHAR}, #{checkTypeName,jdbcType=VARCHAR}, #{startTime,jdbcType=DATE},
+		#{stopTime,jdbcType=DATE}, #{reason,jdbcType=VARCHAR},
+		#{createdAt,jdbcType=DATE},
+		#{updatedAt,jdbcType=DATE}, #{deleteFlag,jdbcType=CHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.wuyongfa.yifa.financialsystem.model.CheckInfo">
+		insert into check_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="employeeId != null">
+				employee_id,
+			</if>
+			<if test="employeeName != null">
+				employee_name,
+			</if>
+			<if test="days != null">
+				days,
+			</if>
+			<if test="checkType != null">
+				check_type,
+			</if>
+			<if test="checkTypeName != null">
+				check_type_name,
+			</if>
+			<if test="startTime != null">
+				start_time,
+			</if>
+			<if test="stopTime != null">
+				stop_time,
+			</if>
+			<if test="reason != null">
+				reason,
+			</if>
+			<if test="createdAt != null">
+				created_at,
+			</if>
+			<if test="updatedAt != null">
+				updated_at,
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="employeeId != null">
+				#{employeeId,jdbcType=INTEGER},
+			</if>
+			<if test="employeeName != null">
+				#{employeeName,jdbcType=VARCHAR},
+			</if>
+			<if test="days != null">
+				#{days,jdbcType=DOUBLE},
+			</if>
+			<if test="checkType != null">
+				#{checkType,jdbcType=CHAR},
+			</if>
+			<if test="checkTypeName != null">
+				#{checkTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="startTime != null">
+				#{startTime,jdbcType=DATE},
+			</if>
+			<if test="stopTime != null">
+				#{stopTime,jdbcType=DATE},
+			</if>
+			<if test="reason != null">
+				#{reason,jdbcType=VARCHAR},
+			</if>
+			<if test="createdAt != null">
+				#{createdAt,jdbcType=DATE},
+			</if>
+			<if test="updatedAt != null">
+				#{updatedAt,jdbcType=DATE},
+			</if>
+			<if test="deleteFlag != null">
+				#{deleteFlag,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.wuyongfa.yifa.financialsystem.model.CheckInfo">
+		update check_info
+		<set>
+			<if test="employeeId != null">
+				employee_id = #{employeeId,jdbcType=INTEGER},
+			</if>
+			<if test="employeeName != null">
+				employee_name = #{employeeName,jdbcType=VARCHAR},
+			</if>
+			<if test="days != null">
+				days = #{days,jdbcType=DOUBLE},
+			</if>
+			<if test="checkType != null">
+				check_type = #{checkType,jdbcType=CHAR},
+			</if>
+			<if test="checkTypeName != null">
+				check_type_name = #{checkTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="startTime != null">
+				start_time = #{startTime,jdbcType=DATE},
+			</if>
+			<if test="stopTime != null">
+				stop_time = #{stopTime,jdbcType=DATE},
+			</if>
+			<if test="reason != null">
+				reason = #{reason,jdbcType=VARCHAR},
+			</if>
+			<if test="createdAt != null">
+				created_at = #{createdAt,jdbcType=DATE},
+			</if>
+			<if test="updatedAt != null">
+				updated_at = #{updatedAt,jdbcType=DATE},
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag = #{deleteFlag,jdbcType=CHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.wuyongfa.yifa.financialsystem.model.CheckInfo">
+		update check_info
+		set employee_id = #{employeeId,jdbcType=INTEGER},
+		employee_name = #{employeeName,jdbcType=VARCHAR},
+		days = #{days,jdbcType=DOUBLE},
+		check_type = #{checkType,jdbcType=CHAR},
+		check_type_name = #{checkTypeName,jdbcType=VARCHAR},
+		start_time = #{startTime,jdbcType=DATE},
+		stop_time = #{stopTime,jdbcType=DATE},
+		reason = #{reason,jdbcType=VARCHAR},
+		created_at = #{createdAt,jdbcType=DATE},
+		updated_at = #{updatedAt,jdbcType=DATE},
+		delete_flag = #{deleteFlag,jdbcType=CHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectAllByPage" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from check_info 
+		where delete_flag = '0'
+		<if test="employeeName != null">
+			and employee_name like '%${employeeName}%'
+		</if>
+		order by start_time desc
+	</select>
+
+	<update id="deleteCheckInfo">
+		update check_info set delete_flag='1',updated_at=sysdate()
+		<where>
+			id in
+			<foreach collection="ids" item="id" open="(" separator=","
+				close=")">
+				#{id}
+			</foreach>
+		</where>
+	</update>
+	
+	<select id="selectByTime" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from check_info 
+		where delete_flag = '0'
+		and start_time between #{startTime} and #{endTime}
+		<if test="employeeId != null">
+			and employee_id = #{employeeId}
+		</if>
+	</select>
+</mapper>

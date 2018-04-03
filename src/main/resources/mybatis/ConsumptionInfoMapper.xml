@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuyongfa.yifa.financialsystem.dao.ConsumptionInfoMapper">
+	<resultMap id="BaseResultMap"
+		type="com.wuyongfa.yifa.financialsystem.model.ConsumptionInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="employee_id" property="employeeId" jdbcType="INTEGER" />
+		<result column="employee_name" property="employeeName"
+			jdbcType="VARCHAR" />
+		<result column="purchase_type_code" property="purchaseTypeCode"
+			jdbcType="CHAR" />
+		<result column="purchase_type_name" property="purchaseTypeName"
+			jdbcType="VARCHAR" />
+		<result column="detail_type_code" property="detailTypeCode"
+			jdbcType="CHAR" />
+		<result column="detail_type_name" property="detailTypeName"
+			jdbcType="VARCHAR" />
+		<result column="specifications" property="specifications"
+			jdbcType="VARCHAR" />
+		<result column="number" property="number" jdbcType="INTEGER" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="created_at" property="createdAt" jdbcType="DATE" />
+		<result column="updated_at" property="updatedAt" jdbcType="DATE" />
+		<result column="delete_flag" property="deleteFlag" jdbcType="CHAR" />
+		<result column="operate_time" property="operateTime" jdbcType="DATE" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, employee_id, purchase_type_code, purchase_type_name,
+		detail_type_code, detail_type_name,employee_name,
+		specifications,
+		number, remark, created_at, updated_at, delete_flag, operate_time
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from consumption_info
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		consumption_info
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insertSelective"
+		parameterType="com.wuyongfa.yifa.financialsystem.model.ConsumptionInfo">
+		insert into consumption_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="employeeId != null">
+				employee_id,
+			</if>
+			<if test="employeeName != null">
+				employee_name,
+			</if>
+			<if test="purchaseTypeCode != null">
+				purchase_type_code,
+			</if>
+			<if test="purchaseTypeName != null">
+				purchase_type_name,
+			</if>
+			<if test="detailTypeCode != null">
+				detail_type_code,
+			</if>
+			<if test="detailTypeName != null">
+				detail_type_name,
+			</if>
+			<if test="specifications != null">
+				specifications,
+			</if>
+			<if test="number != null">
+				number,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="createdAt != null">
+				created_at,
+			</if>
+			<if test="updatedAt != null">
+				updated_at,
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag,
+			</if>
+			<if test="operateTime != null">
+				operate_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="employeeId != null">
+				#{employeeId,jdbcType=INTEGER},
+			</if>
+			<if test="employeeName != null">
+				#{employeeName,jdbcType=INTEGER},
+			</if>
+			<if test="purchaseTypeCode != null">
+				#{purchaseTypeCode,jdbcType=CHAR},
+			</if>
+			<if test="purchaseTypeName != null">
+				#{purchaseTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="detailTypeCode != null">
+				#{detailTypeCode,jdbcType=CHAR},
+			</if>
+			<if test="detailTypeName != null">
+				#{detailTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="specifications != null">
+				#{specifications,jdbcType=VARCHAR},
+			</if>
+			<if test="number != null">
+				#{number,jdbcType=INTEGER},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdAt != null">
+				#{createdAt,jdbcType=DATE},
+			</if>
+			<if test="updatedAt != null">
+				#{updatedAt,jdbcType=DATE},
+			</if>
+			<if test="deleteFlag != null">
+				#{deleteFlag,jdbcType=CHAR},
+			</if>
+			<if test="operateTime != null">
+				#{operateTime,jdbcType=DATE},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.wuyongfa.yifa.financialsystem.model.ConsumptionInfo">
+		update consumption_info
+		<set>
+			<if test="employeeId != null">
+				employee_id = #{employeeId,jdbcType=INTEGER},
+			</if>
+			<if test="employeeName != null">
+				employee_name = #{employeeName,jdbcType=INTEGER},
+			</if>
+			<if test="purchaseTypeCode != null">
+				purchase_type_code = #{purchaseTypeCode,jdbcType=CHAR},
+			</if>
+			<if test="purchaseTypeName != null">
+				purchase_type_name =
+				#{purchaseTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="detailTypeCode != null">
+				detail_type_code = #{detailTypeCode,jdbcType=CHAR},
+			</if>
+			<if test="detailTypeName != null">
+				detail_type_name = #{detailTypeName,jdbcType=VARCHAR},
+			</if>
+			<if test="specifications != null">
+				specifications = #{specifications,jdbcType=VARCHAR},
+			</if>
+			<if test="number != null">
+				number = #{number,jdbcType=INTEGER},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createdAt != null">
+				created_at = #{createdAt,jdbcType=DATE},
+			</if>
+			<if test="updatedAt != null">
+				updated_at = #{updatedAt,jdbcType=DATE},
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag = #{deleteFlag,jdbcType=CHAR},
+			</if>
+			<if test="operateTime != null">
+				operate_time = #{operateTime,jdbcType=DATE},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectAllByPage" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from consumption_info
+		where delete_flag = '0'
+		<if test="startTime != null">
+			and operate_time &gt; #{startTime}
+		</if>
+		<if test="endTime != null">
+			and operate_time &lt; #{endTime}
+		</if>
+		<if test="employeeName != null">
+			and employee_name like '%${employeeName,jdbcType=INTEGER}%',
+		</if>
+		order by operate_time desc
+	</select>
+
+	<update id="deleteConsumptionInfo">
+		update consumption_info set delete_flag='1',updated_at=sysdate()
+		<where>
+			id in
+			<foreach collection="ids" item="id" open="(" separator=","
+				close=")">
+				#{id}
+			</foreach>
+		</where>
+	</update>
+</mapper>
